@@ -1,1 +1,5 @@
-# pontoDigital
+# Ponto digital
+
+---
+
+ * Apontamento de horas 
