@@ -3,9 +3,9 @@
 Ponto digital - Apontamento de horas
 
  ---
- ## Executando o projeto
+ ## *Executando o projeto*
 
- ## Server
+ ## Server - Em construção
    * Abra a pasta ./server no terminal
    * Execute os seguintes comandos em ordem:
       * npm install
@@ -13,7 +13,7 @@ Ponto digital - Apontamento de horas
       * npm run knex:migrate
       * npm run dev
 
-## Portal web
+## Portal web - Em construção
    * Abra a pasta ./web no terminal
    * Execute os seguintes comandos em ordem:
       * npm install
