@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router';
 import { useRouteMatch } from 'react-router-dom';
-import { UserPage } from './user';
+import { UserEdit } from './edit';
 
 export default function UsersFeatureModule() {
     let { path } = useRouteMatch();
@@ -13,7 +13,7 @@ export default function UsersFeatureModule() {
 
     return (
         <Switch>
-            <Route path={`${path}/user/:userUUid?`} component={UserPage} />
+            <Route path={`${path}/user/:userUUid?`} component={UserEdit} />
         </Switch>
     )
 }

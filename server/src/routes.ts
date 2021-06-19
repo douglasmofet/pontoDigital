@@ -7,7 +7,8 @@ const routes = express.Router();
 const entranceController = new EntranceController();
 const usersController = new UsersController();
 
-routes.post('/users', usersController.create);
+routes.post('/users/create', usersController.create);
+routes.post('/login', usersController.create);
 routes.post('/entrance', entranceController.list);
 
 export default routes;

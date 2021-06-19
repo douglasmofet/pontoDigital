@@ -12,7 +12,7 @@ export function Pages() {
 
     return (
         <React.Fragment>
-            <Navbar items={mainMenu} onNavigate={push} />
+            {/* <Navbar items={mainMenu} onNavigate={push} /> */}
             <Switch>
                 <Route path={'/admin'} component={AdminModulePages} />
                 <Route path={'/'} component={SharedModulePages} />

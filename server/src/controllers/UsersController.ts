@@ -1,31 +1,33 @@
+import 'reflect-metadata';
 import { Request, Response } from 'express';
-import knex from '../database/connection';
+import { container } from 'tsyringe';
+
+import CreateUserService from '../modules/users/services/CreateUserService';
 
 import IEditUserDTO from '../modules/users/dtos/IEditUserDTO';
 
 class UsersController {
-  async create(request: Request, response: Response) {
+  public async create(request: Request, response: Response): Promise<Response> {
     const {
       name,
       email,
       password,
-    } = request.body;
+    }: IEditUserDTO = request.body;
 
-    const trx = await knex.transaction();
+    const createUser = container.resolve(CreateUserService);
 
-    const user: IEditUserDTO = {
-      name,
-      email,
-      password
-    };
+    try {
+      const user = await createUser.execute({
+        name,
+        email,
+        password
+      });
 
-    await trx('user').insert(user);
+      return response.json(user);
 
-    await trx.commit();
-
-    return response.json({
-      user
-    });
+    } catch (error) {
+      return response.status(error.statusCode).json(error);
+    }
   }
 }
 
