@@ -12,8 +12,9 @@ export default function UsersFeatureModule() {
     // Render
 
     return (
-        <Switch>
-            <Route path={`${path}/user/:userUUid?`} component={UserEdit} />
-        </Switch>
+        <h1>Users</h1>
+        // <Switch>
+        //     <Route path={`${path}/user/:userUUid?`} component={UserEdit} />
+        // </Switch>
     )
 }

@@ -1,8 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../../components/forms/button';
-import loginService from '../../../services/login/loginService';
-import { createUserService, userService } from '../../../services/user/userService';
+import { createUserService } from '../../../services/user/userService';
 import { Container, InputGroup } from '../style';
 import { RegisterStyle } from './style';
 
@@ -48,7 +47,7 @@ export function Register(props: UserProps) {
     };
 
     const user = await createUserService(data);
-    
+
     if(user != null)
       history.push('/');
   }
@@ -73,6 +72,7 @@ export function Register(props: UserProps) {
             <input
               name="email"
               required
+              type="email"
               onChange={handleInputChange}
             />
           </InputGroup>

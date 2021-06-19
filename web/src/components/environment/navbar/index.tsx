@@ -12,23 +12,24 @@ export function Navbar(props:NavbarProps) {
     // Render
 
     return (
-        <div className={'dc-navbar'}>
-            <ul>
-                {props.items.map((item, idx) => 
-                    <li key={idx}>
-                        <a 
-                            href={'#a'}
-                            onClick={(evt) => { 
-                                evt.preventDefault(); 
-                                props.onNavigate(item.path)
-                            }}
-                        >
-                            {item.title}
-                        </a>
-                    </li>
-                )}
-            </ul>
-            <hr />
-        </div>
+        <></>
+        // <div className={'dc-navbar'}>
+        //     <ul>
+        //         {props.items.map((item, idx) => 
+        //             <li key={idx}>
+        //                 <a 
+        //                     href={'#a'}
+        //                     onClick={(evt) => { 
+        //                         evt.preventDefault(); 
+        //                         props.onNavigate(item.path)
+        //                     }}
+        //                 >
+        //                     {item.title}
+        //                 </a>
+        //             </li>
+        //         )}
+        //     </ul>
+        //     <hr />
+        // </div>
     )
 }

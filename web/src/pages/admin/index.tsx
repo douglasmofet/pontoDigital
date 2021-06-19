@@ -8,8 +8,9 @@ export default function AdminModule() {
     const UsersPages = getLazyLoadContainerFor(() => import('./users'));
     
     return (
-        <Switch>
-            <Route path={`${path}/users`} component={UsersPages} />
-        </Switch>
+        <h1>Admin</h1>
+        // <Switch>
+        //     <Route path={`${path}/users`} component={UsersPages} />
+        // </Switch>
     )
 }

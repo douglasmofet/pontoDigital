@@ -1,8 +1,14 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '../../../components/forms/button';
-import loginService from '../../../services/login/loginService';
+import { useAuth } from '../../../hooks/auth';
+
+import { authServiceLogin } from '../../../services/auth/authService';
+import handleErrors from '../../../services/shared/errorsService';
+
 import { Container, InputGroup } from '../style';
 import { Login } from './style';
+
 export interface LoginProps {
 	children?: any
 }
@@ -12,7 +18,10 @@ export interface LoginState {
 	password: string;
 }
 
-export function LoginPage(props: LoginProps) {
+export const LoginPage : React.FC = (props: LoginProps) => {
+	const history = useHistory();
+	const { signIn } = useAuth();
+
 	const [formData, setFormData] = useState<LoginState>({
 		email: '',
 		password: ''
@@ -37,7 +46,13 @@ export function LoginPage(props: LoginProps) {
 			password
 		};
 
-		loginService(data);
+		try {
+			const user = await authServiceLogin(data);
+			await signIn(user);
+			history.push('/admin');
+		} catch (error) {
+			handleErrors(error);
+		}
 	}
 
 	return (
@@ -51,6 +66,7 @@ export function LoginPage(props: LoginProps) {
 						<input
 							name="email"
 							placeholder="E-mail"
+							type="email"
 							onChange={handleInputChange}
 						/>
 					</InputGroup>
@@ -67,7 +83,7 @@ export function LoginPage(props: LoginProps) {
 
 					<Button type="submit">Entrar</Button>
 				</form>
-				
+
 			</Login>
 		</Container>
 	)
