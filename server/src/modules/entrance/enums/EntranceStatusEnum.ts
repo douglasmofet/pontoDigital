@@ -1,6 +1,6 @@
-const enum EntranceStatusEnum {
-	active = 1,
-	inactive = 2
+enum EntranceStatusEnum {
+	Active = 1,
+	Inactive = 2
 };
 
 export default EntranceStatusEnum;

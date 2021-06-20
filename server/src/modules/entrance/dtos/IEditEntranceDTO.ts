@@ -1,10 +1,10 @@
 import EntranceStatusEnum from "../enums/EntranceStatusEnum";
 import EntranceTypeEnum from "../enums/EntranceTypeEnum";
 
-export default interface EntranceEdit {
+export default interface IEntranceEditDTO {
 	userId: number;
 	hour: Date;
-	day: Date;
+	date: Date;
 	type: EntranceTypeEnum;
 	status: EntranceStatusEnum;
 }

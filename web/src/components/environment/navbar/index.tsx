@@ -1,35 +1,23 @@
-import * as React from 'react'
+import { Link } from 'react-router-dom';
 import { NavbarItem } from './types'
 
 export interface NavbarProps {
-    items: NavbarItem[],
-    onNavigate: (path: string) => void
+	items: NavbarItem[],
 }
 
-export function Navbar(props:NavbarProps) {
-
-    // ---------------------------------------------
-    // Render
-
-    return (
-        <></>
-        // <div className={'dc-navbar'}>
-        //     <ul>
-        //         {props.items.map((item, idx) => 
-        //             <li key={idx}>
-        //                 <a 
-        //                     href={'#a'}
-        //                     onClick={(evt) => { 
-        //                         evt.preventDefault(); 
-        //                         props.onNavigate(item.path)
-        //                     }}
-        //                 >
-        //                     {item.title}
-        //                 </a>
-        //             </li>
-        //         )}
-        //     </ul>
-        //     <hr />
-        // </div>
-    )
+export function Navbar(props: NavbarProps) {
+	return (
+		<div>
+			<ul>
+				{props.items.map((item, idx) =>
+					<li key={idx}>
+						<Link to={item.path}>
+							{item.title}
+						</Link>
+					</li>
+				)}
+			</ul>
+			<hr />
+		</div>
+	)
 }

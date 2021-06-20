@@ -10,7 +10,7 @@ import { Container, InputGroup } from '../style';
 import { Login } from './style';
 
 export interface LoginProps {
-	children?: any
+	children?: any;
 }
 
 export interface LoginState {
@@ -18,7 +18,7 @@ export interface LoginState {
 	password: string;
 }
 
-export const LoginPage : React.FC = (props: LoginProps) => {
+export const LoginPage: React.FC = (props: LoginProps) => {
 	const history = useHistory();
 	const { signIn } = useAuth();
 

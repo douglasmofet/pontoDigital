@@ -1,28 +1,27 @@
 import * as React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { Navbar } from '../components/environment/navbar';
+import { Route, Switch } from 'react-router-dom';
 import { useAuth } from '../hooks/auth';
 import { getLazyLoadContainerFor } from '../lib/lazyLoading';
-import { mainMenu } from './menu';
-
 
 export function Pages() {
-    const { user } = useAuth();
-    const AdminModulePages = getLazyLoadContainerFor(() => import('./admin/'));
-    const SharedModulePages = getLazyLoadContainerFor(() => import('./shared/'));
+  const { user } = useAuth();
+  const AdminModulePages = getLazyLoadContainerFor(() => import('./admin/'));
+  // const EntrancesPage = getLazyLoadContainerFor(() => import('./admin/entrances/'));
 
-    console.log('Pages', user);
+  const SharedModulePages = getLazyLoadContainerFor(() => import('./shared/'));
 
-    return (
-        <React.Fragment>
-            {/* <Navbar items={mainMenu} onNavigate={push} /> */}
-            <Switch>
-                {
-                    user &&
-                    <Route path={'/admin'} component={AdminModulePages} />
-                }
-                <Route path={'/'} component={SharedModulePages} />
-            </Switch>
-        </React.Fragment>
-    )
+  return (
+    <React.Fragment>
+      <Switch>
+        {
+          user &&
+          [
+            <Route path={'/admin'} component={AdminModulePages} />,
+            // <Route path={'/admin/entrances'} component={EntrancesPage} />
+          ]
+        }
+        <Route path={'/'} component={SharedModulePages} />
+      </Switch>
+    </React.Fragment>
+  )
 }

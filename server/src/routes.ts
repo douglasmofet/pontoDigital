@@ -9,8 +9,12 @@ const entranceController = new EntranceController();
 const usersController = new UsersController();
 const authController = new AuthController();
 
-routes.post('/users/create', usersController.create);
 routes.post('/login', authController.execute);
-routes.post('/entrance', entranceController.list);
+routes.post('/users/create', usersController.create);
+
+routes.post('/entrances', entranceController.list);
+routes.get('/entrance/getYears', entranceController.getYears);
+routes.get('/entrance/list', entranceController.list);
+routes.post('/entrance/create', entranceController.create);
 
 export default routes;

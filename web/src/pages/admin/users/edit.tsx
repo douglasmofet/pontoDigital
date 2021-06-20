@@ -7,8 +7,8 @@ export interface UserEditUrlParams {
 
 export function UserEdit(props: RouteChildrenProps<UserEditUrlParams> ) {
     return (
-        <div className={'dc-user-edit'}>
-            <h4>Quero me cadastrar</h4>
+        <div>
+            <h4>Edição</h4>
         </div>
     )
 }

@@ -1,51 +1,76 @@
+import 'reflect-metadata';
 import { Request, Response } from 'express';
-import knex from '../database/connection';
+import { container } from 'tsyringe';
 
 import IEditEntranceDTO from '../modules/entrance/dtos/IEditEntranceDTO';
 import EntranceStatusEnum from '../modules/entrance/enums/EntranceStatusEnum';
 
+import GetEntranceYearsService from '../modules/entrance/services/GetEntranceYearsService';
+import GetEntranceListService from '../modules/entrance/services/GetEntranceListService';
+import CreateEntranceService from '../modules/entrance/services/CreateEntranceService';
+import IEntranceEditDTO from '../modules/entrance/dtos/IEditEntranceDTO';
+
 class Entrance {
-  async create(request: Request, response: Response) {
+  public async create(request: Request, response: Response) {
     const {
       userId,
       hour,
-      day,
-      type
-    } = request.body;
-
-    const trx = await knex.transaction();
-
-    const entrance: IEditEntranceDTO = {
-      userId,
-      hour,
-      day,
+      date,
       type,
-      status: EntranceStatusEnum.active
-    };
+      status
+    }: IEntranceEditDTO = request.body;
 
-    await trx('entrance').insert(entrance);
+    const createEntrance = container.resolve(CreateEntranceService);
 
-    await trx.commit();
+    try {
+      const entrance = await createEntrance.execute({
+        userId,
+        hour,
+        date,
+        type,
+        status
+      });
 
-    return response.json({
-      entrance
-    });
+      return response.json(entrance);
+
+    } catch (error) {
+      return response.status(error.statusCode).json(error);
+    }
   }
 
-  async list(request: Request, response: Response) {
-    const { id } = request.params;
+  public async list(request: Request, response: Response) {
+    // const {
+    //   userId,
+    //   date
+    // } = request.body;
 
-    const user = await knex('user').where('id', id).first();
+    const { userId, date } = request.query;
 
-    if (!user) {
-      return response.status(400).json({ message: 'User not found.' })
+    const entranceList = container.resolve(GetEntranceListService);
+      
+    try {
+      const items = await entranceList.execute(Number(userId));
+
+      return response.json(items);
+
+    } catch (error) {
+      return response.status(error.statusCode).json(error);
     }
+  }
 
-    const items: IEditEntranceDTO[] = await knex('entrance')
-      .where('entrance.userId', id)
-      .select('items');
+  public async getYears(request: Request, response: Response): Promise<Response> {
+    const { userId } = request.query;
 
-    return response.json({ user, items });
+    const getYears = container.resolve(GetEntranceYearsService);
+      
+    try {
+      const years = await getYears.execute(Number(userId));
+
+      return response.json(years);
+
+    } catch (error) {
+      return response.status(error.statusCode).json(error);
+    }
   }
 }
 

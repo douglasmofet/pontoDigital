@@ -1,8 +1,8 @@
-const enum EntranceTypeEnum {
-	start = 1,
-	middleStart = 2,
-	middleEnd = 3,
-	end = 4
+enum EntranceTypeEnum {
+	Start = 1,
+	MiddleStart = 2,
+	MiddleEnd = 3,
+	End = 4
 };
 
 export default EntranceTypeEnum;
