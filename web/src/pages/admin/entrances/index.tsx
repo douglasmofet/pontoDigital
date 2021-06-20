@@ -143,7 +143,7 @@ const EntracesPage = (props: EntracesPageProps) => {
   return (
     <>
       <h2>Lançamentos</h2>
-      {renderFilters()}
+      {/* {renderFilters()} */}
       <Container>
         {renderContent()}
       </Container>
